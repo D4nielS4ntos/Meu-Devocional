@@ -312,14 +312,12 @@ nav .menu-icon{
 
 
     <div class="mud-pagina">
-         <a href="javascript:history.back()">Página inicial</a>
-        <a href="harpa6.html">Página seguinte</a>
-        
+         <a href="javascript:history.back()">Página inicial</a>        
     </div>
     <script>
         let divButtons = document.querySelector("#buttons")
         let divRowContent = ''
-        let numeroDoHinoButton = 401
+        let numeroDoHinoButton = 601
         
         
         function escutarButtons() {
@@ -332,7 +330,7 @@ nav .menu-icon{
         }
 
         function carregarButtons(escutarButtons) {
-            for(let x = 1; x <= 10; x++) {
+            for(let x = 1; x <= 4; x++) {
                 let numeroDoHinoButtonFimLinha = numeroDoHinoButton + 10
                 for(numeroDoHinoButton; numeroDoHinoButton < numeroDoHinoButtonFimLinha; numeroDoHinoButton++) {
                     if (numeroDoHinoButton < 10) {

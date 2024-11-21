@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
     <link rel="stylesheet" href="menu.css">
-    <title>Chuvas de Graça</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <title>Hino</title>
 </head>
 <body>
          <!-- nav -->
          <nav>
           <div class="logo">
-            <a href="index.html">Meu Devocional</a>
+            <a href="../index.html">Meu Devocional</a>
           </div>
           <ul>
             <li><a href="../index.html">Home</a></li>
@@ -29,10 +32,10 @@
           </div>
         </nav>
         <!-- end nav -->
-    <div class="text-bx">
-         <h1></h1>
-         <p></p>    
-    </div>
+ <div class="text-bx">
+         <h1 id="título"></h1>
+         <p id="letra"></p>
+  </div>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
         *{
@@ -49,11 +52,14 @@
            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 20px;
             text-align: center;
+
+            
           }
-          v-footer{
+          footer{
     background-color:#f49cbb;
     padding: 50px 0;
 }
+
 .container-footer{
     max-width: 1400px;
     padding: 0 4%;
@@ -143,6 +149,40 @@
     font-weight: bold;
     background-color: #f2b5d4;        
 }
+
+
+
+.medias-socias{
+    margin-top: 30px;
+}
+.medias-socias a{
+    text-decoration: none;
+}
+
+.medias-socias i{
+    font-size: 23px;
+    margin: 0 3px;
+    color: white;
+    background-color: #f5efff;
+    padding: 7px;
+    border-radius: 5px;
+}
+.text {
+        font-size: 18px;
+        margin: 0 3px;
+        color: white;
+       
+}
+.img-bx{
+    width: 60%;
+}
+.img-bx img{
+    width: 90%;
+    height: 100%;
+    justify-content: center;
+}
+
+
 /* Responsivo */
 @media (max-width: 800px) {
     .footer-col{
@@ -157,43 +197,74 @@
 }
 
     </style>
-   <footer>
-    <div class="container-footer">
-      <div class="row-footer">
-        <!-- footer col-->
-        <div class="footer-col">
-          <h4>Empresa</h4>
-          <ul>
-            <li><a href="comecando.html"> Quem somos </a></li>
-            <li><a href="index.html"> nossos serviços </a></li>
-           
+    <!-- footer col-->
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="../comecando.html"> Quem somos </a></li>
+        <li><a href="../index.html"> nossos serviços </a></li>
+       
 
-        </div>
-
-        <div class="footer-col">
-          <h4>Redes Sociais</h4>
-          <div class="medias-socias">
-            <a href="https://www.youtube.com/@evelly_brena"> <i class="fa fa-youtube-play"></i> </a>
-            <a href="https://www.instagram.com/meu_devocional._?igsh=MTRxNXF6dWI3OWoyNA=="> <i
-                class="fa fa-instagram"></i> </a>
-            <a href="https://chat.whatsapp.com/LxG5o8mNfhYHzWsZ2MrMSo"> <i class="fa fa-whatsapp"></i> </a>
-          </div>
-
-        </div>
-
-        <div class="text">
-    
-          <ul>
-         <p>
-            ©2024 Meu Devocional.  </p>
-          
-
-
-        </div>
-
-        <!--end footer col-->
-      </div>
     </div>
-  </footer>
+
+    <footer>
+      <div class="container-footer">
+        <div class="row-footer">
+          <!-- footer col-->
+          <div class="footer-col">
+            <h4>Empresa</h4>
+            <ul>
+              <li><a href="../comecando.html"> Quem somos </a></li>
+              <li><a href="../index.html"> nossos serviços </a></li>
+             
+  
+          </div>
+  
+          <div class="footer-col">
+            <h4>Redes Sociais</h4>
+            <div class="medias-socias">
+              <a href="https://www.youtube.com/@evelly_brena"> <i class="fab fa-youtube"></i> </a>
+              <a href="https://www.instagram.com/meu_devocional._?igsh=MTRxNXF6dWI3OWoyNA=="> 
+                <i class="fab fa-instagram"></i> </a>
+              <a href="https://chat.whatsapp.com/LxG5o8mNfhYHzWsZ2MrMSo"> <i class="fab fa-whatsapp"></i> </a>
+            </div>
+  
+          </div>
+  
+          <div class="text">
+      
+            <ul>
+           <p>
+              ©2024 Meu Devocional.  </p>
+            
+  
+  
+          </div>
+  
+          <!--end footer col-->
+        </div>
+      </div>
+    </footer>
+    <script>
+      let title = document.querySelector("title");
+      let h1 = document.querySelector("#título");
+      let p = document.querySelector("#texto");
+      let letra = document.querySelector("#letra");
+
+      window.addEventListener("load", () => {
+          let numeroHino = sessionStorage.getItem("numero_hino");
+          apiBuscarHinos(numeroHino);
+      })
+      async function apiBuscarHinos(numeroHino) {
+          let response = await fetch(`https://harpa-api.onrender.com/hymns/${numeroHino}`);
+          let hino = await response.json();
+          title.innerHTML = hino.hymn.title;
+          h1.innerHTML = hino.hymn.title;
+          for (verso of hino.hymn.verses) {
+            let versoF = verso.lyrics.replaceAll("\n", "</br>");
+            letra.innerHTML += `<p id="texto">${versoF}</p>`;
+          }
+      }
+  </script>
 </body>
 </html>
